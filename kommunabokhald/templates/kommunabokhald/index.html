@@ -1,0 +1,29 @@
+{% extends 'kommunabokhald/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <p>Hello {{ user.first_name }}</p>
+    <p>You owe {{ user.get_total_debt_due }} kr</p>
+
+    <p>Make a payment:</p>
+    <!-- for for payment -->
+    <form method="post" action="/payment/">
+        {% csrf_token %}
+        <label for="amount">amount:</label>
+        <input id="amount" type="number" name="amount" value="0" /> <br />
+
+        <label for="reason">reason:</label>
+        <input id="reason" type="text" name="reason" /> <br />
+
+        <label for="is_rent">is rent:</label>
+        <input id="is_rent" type="checkbox" name="is_rent" value="is_rent"> <br />
+
+        <input type="submit" value="make payment"> <br />
+    </form>
+
+    <a href="{% url 'logout' %}">log out</a>
+{% else %}
+    <a href="{% url 'login' %}">log in</a>
+{% endif %}
+    <p>Hello</p>
+{% endblock %}
