@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Housemate, Payment
+from .models import Housemate, Payment, Rent
 
 
 # Create your views here.
@@ -26,3 +26,17 @@ def payment(request):
     )
     p.save()
     return redirect('/index/', permanent=True)
+
+@login_required
+def overview(request):
+    """
+    display page to see overview of payments and rent since user joined
+    """
+    user = Housemate.objects.get(pk=request.user.pk)
+    try:
+        rents = Rent.objects.get(created__gte=user.date_joined)
+    except Rent.DoesNotExist:
+        rents = None
+    payments = Payment.objects.filter(payment_date__gte=user.date_joined)
+    print(payments[0].amount)
+    return render(request, 'kommunabokhald/overview.html', {'rents': rents, 'payments': payments, 'user': user})

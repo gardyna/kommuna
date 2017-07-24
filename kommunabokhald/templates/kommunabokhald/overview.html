@@ -1,0 +1,22 @@
+{% extends 'kommunabokhald/base.html' %}
+
+{% block content %}
+<p>Payments total: ???</p>
+<p>Rent total: ???</p>
+<table>
+    <tr>
+        <td>Amount</td>
+        <td>reason</td>
+        <td>Housemate</td>
+        <td>date</td>
+    </tr>
+{% for p in payments %}
+    <tr>
+        <td>{{p.amount}}</td>
+        <td>{{p.reason}}</td>
+        <td>{{p.user.get_username}}</td>
+        <td>{{p.payment_date}}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
