@@ -1,0 +1,8 @@
+<div class="header">
+    
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log out</a>
+    {% else %}
+        <a href="{% url 'login' %}">log in</a>
+    {% endif %}
+</div>
