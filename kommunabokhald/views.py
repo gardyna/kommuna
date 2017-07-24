@@ -40,3 +40,12 @@ def overview(request):
     payments = Payment.objects.filter(payment_date__gte=user.date_joined)
     print(payments[0].amount)
     return render(request, 'kommunabokhald/overview.html', {'rents': rents, 'payments': payments, 'user': user})
+
+def payments_in_timespan(request):
+    """
+    get all payments within requested timespan
+    TODO: implement
+    expect json: {from: date, to: date}
+    :return: json response
+    """
+    pass
