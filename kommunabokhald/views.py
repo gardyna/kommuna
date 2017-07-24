@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import Housemate, Payment, Rent
 
@@ -34,18 +35,19 @@ def overview(request):
     """
     user = Housemate.objects.get(pk=request.user.pk)
     try:
-        rents = Rent.objects.get(created__gte=user.date_joined)
+        rents = Rent.objects.filter(created__gte=user.date_joined)
     except Rent.DoesNotExist:
         rents = None
-    payments = Payment.objects.filter(payment_date__gte=user.date_joined)
-    print(payments[0].amount)
+    payments = Payment.objects.filter(payment_date__gte=user.date_joined, is_rent=False)
     return render(request, 'kommunabokhald/overview.html', {'rents': rents, 'payments': payments, 'user': user})
 
+@login_required
 def payments_in_timespan(request):
     """
     get all payments within requested timespan
-    TODO: implement
     expect json: {from: date, to: date}
+    date in format "yyyy-mm-dd"
     :return: json response
     """
-    pass
+    payments = Payment.objects.filter(payment_date__range=[request.GET['from'], request.GET['to']])
+    return JsonResponse(payments)

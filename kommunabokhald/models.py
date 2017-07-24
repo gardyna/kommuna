@@ -54,6 +54,7 @@ class Rent(models.Model):
     internet = models.IntegerField()
     gagnaveitan = models.IntegerField()
     house_reparations = models.IntegerField()
+    comments = models.CharField(max_length=200, default='')
 
     # auto filled used for calculations and book keeping
     housemates_this_month = models.IntegerField(default=get_total_housemates)
@@ -74,6 +75,3 @@ class Rent(models.Model):
         :return:
         """
         return self.get_total_payment_due() // self.housemates_this_month
-
-
-

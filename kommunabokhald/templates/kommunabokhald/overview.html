@@ -3,12 +3,12 @@
 {% block content %}
 <p>Payments total: ???</p>
 <p>Rent total: ???</p>
-<table>
+<table id='payments-table'>
     <tr>
         <td>Amount</td>
         <td>reason</td>
         <td>Housemate</td>
-        <td>date</td>
+        <td>Date</td>
     </tr>
 {% for p in payments %}
     <tr>
@@ -16,6 +16,27 @@
         <td>{{p.reason}}</td>
         <td>{{p.user.get_username}}</td>
         <td>{{p.payment_date}}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<table id='rents-table'>
+    <tr>
+        <td>Rent</td>
+        <td>House fund</td>
+        <td>Electricity</td>
+        <td>Internet</td>
+        <td>House reperation</td>
+        <td>Total</td>
+    </tr>
+{% for r in rents %}
+    <tr>
+        <td>{{r.house_rent}} kr</td>
+        <td>{{r.house_fund}}</td>
+        <td>{{r.electricity}}</td>
+        <td>{{r.internet}}</td>
+        <td>{{r.house_reparations}}</td>
+        <td>{{r.get_total_payment_due}}</td>
     </tr>
 {% endfor %}
 </table>
