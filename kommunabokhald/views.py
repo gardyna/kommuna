@@ -38,8 +38,10 @@ def overview(request):
         rents = Rent.objects.filter(created__gte=user.date_joined)
     except Rent.DoesNotExist:
         rents = None
-    payments = Payment.objects.filter(payment_date__gte=user.date_joined, is_rent=False)
-    return render(request, 'kommunabokhald/overview.html', {'rents': rents, 'payments': payments, 'user': user})
+    payments = (Payment.objects.filter(payment_date__gte=user.date_joined, is_rent=False)
+                .order_by('-payment_date'))
+    return render(request, 'kommunabokhald/overview.html',
+                    {'rents': rents, 'payments': payments, 'user': user})
 
 @login_required
 def payments_in_timespan(request):
