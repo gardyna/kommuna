@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com", ".researchthroughdesign.org", 'localhost']
+ALLOWED_HOSTS = [".herokuapp.com", 'localhost', 'kommunan.com']
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -56,8 +56,7 @@ ROOT_URLCONF = 'kommuna.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
