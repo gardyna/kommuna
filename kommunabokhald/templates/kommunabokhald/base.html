@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Bókhald</title>
+    {% load static %}
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/defaults.css" %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
 {% include "header.html" %}
-{% block content %}
-{% endblock %}
+<div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>

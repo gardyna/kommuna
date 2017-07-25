@@ -2,7 +2,6 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p>Hello {{ user.first_name }}</p>
     <p>You owe {{ user.get_total_debt_due }} kr</p>
 
     <p>Make a payment:</p>
@@ -23,5 +22,4 @@
 {% else %}
     <a href="{% url 'login' %}">log in</a>
 {% endif %}
-    <p>Hello</p>
 {% endblock %}
