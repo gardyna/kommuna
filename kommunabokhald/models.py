@@ -65,7 +65,6 @@ class Rent(models.Model):
         get the total calculated amount that is to be split between all housemates
         :return: the total amount to pay for a current month
         """
-
         return (self.house_rent + self.house_fund + self.electricity + self.internet + self.gagnaveitan  # expenses
                 - self.house_reparations)  # deductibles
 
