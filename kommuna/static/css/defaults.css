@@ -1,0 +1,14 @@
+div.tables {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.subTable {
+    height: 55em;
+    overflow-y: auto;
+    margin: 2%;
+    flex: 1;
+    width: 40%;
+
+}
