@@ -4,3 +4,4 @@ itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
 psycopg2==2.7
+django-widget-tweaks==1.4.1

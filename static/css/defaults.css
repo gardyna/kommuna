@@ -16,6 +16,10 @@ div.payments {
     border: 1em;
 }
 
+.login_form {
+    width: 50%;
+}
+
 .subTable {
     height: 55em;
     overflow-y: auto;
