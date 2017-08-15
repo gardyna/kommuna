@@ -1,14 +1,24 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/index">Heimasíða</a>
+            <a class="navbar-brand" href="/index">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Heimasíða
+            </a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="/overview">Yfirlit</a></li>
+          <li>
+              <a href="/overview">
+                  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Yfirlit
+              </a>
+          </li>
           <li>{% if user.is_authenticated %}
-              <a href="{% url 'logout' %}">Skrá út</a>
+              <a href="{% url 'logout' %}">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá út
+              </a>
           {% else %}
-              <a href="{% url 'login' %}">Skrá inn</a>
+              <a href="{% url 'login' %}">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá inn
+              </a>
           {% endif %}</li>
         </ul>
     </div>
