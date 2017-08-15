@@ -4,6 +4,18 @@ div.tables {
     justify-content: center;
 }
 
+div.payments {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.paymentForm {
+    flex: 1;
+    padding: 2%;
+    border: 1em;
+}
+
 .subTable {
     height: 55em;
     overflow-y: auto;
