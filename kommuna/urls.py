@@ -25,5 +25,14 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, name='logout', kwargs={'next_page': '/'}),
-    url(r'', include('kommunabokhald.urls'))
+    url(r'', include('kommunabokhald.urls')),
+    url('^', include('django.contrib.auth.urls')),
+    url(r'^password_reset/$', auth_views.password_reset, name='password_reset',
+        kwargs={
+            'template_name': '/registration/password_reset_form.html'
+        }),
+    url(r'^password_reset/done/$', auth_views.password_reset_done),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    auth_views.password_reset_confirm),
+    url(r'^reset/done/$', auth_views.password_reset_complete),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
