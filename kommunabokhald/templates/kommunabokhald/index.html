@@ -2,24 +2,50 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p>You owe {{ user.get_total_debt_due }} kr</p>
+    <p>Þú skuldar {{ user.get_total_debt_due }} kr</p>
+    <div class="payments">
+        <div class="paymentForm">
+            <h3>Borga Leigu:</h3>
 
-    <p>Make a payment:</p>
-    <!-- for for payment -->
-    <form method="post" action="/payment/">
-        {% csrf_token %}
-        <label for="amount">amount:</label>
-        <input id="amount" type="number" name="amount" value="0" /> <br />
+            <!-- form for rent payments -->
+            <form method="post" action="/payment/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="amount">Upphæð:</label>
+                    <input class="form-control" id="amount" type="number" name="amount" value="0" /> <br />
 
-        <label for="reason">reason:</label>
-        <input id="reason" type="text" name="reason" /> <br />
+                    <label for="reason">Lýsing:</label>
+                    <input class="form-control" id="reason" type="text" name="reason" /> <br />
 
-        <label for="is_rent">is rent:</label>
-        <input id="is_rent" type="checkbox" name="is_rent" value="is_rent"> <br />
+                    <input type="hidden" name="is_rent" value="true" />
+                    <!--label for="is_rent">er leiga:</label>
+                    <input id="is_rent" type="checkbox" name="is_rent" value="is_rent"> <br /-->
+                </div>
+                <input class="btn btn-default" type="submit" value="Greiða"> <br />
+            </form>
+        </div>
 
-        <input type="submit" value="make payment"> <br />
-    </form>
+        <div class="paymentForm">
+            <h3>Borga Sameiginlegt:</h3>
+            <!-- form for communal payments -->
+            <form method="post" action="/payment/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="amount">Upphæð:</label>
+                    <input class="form-control" id="amount" type="number" name="amount" value="0" /> <br />
+
+                    <label for="reason">Lýsing:</label>
+                    <input class="form-control" id="reason" type="text" name="reason" /> <br />
+
+                    <input type="hidden" name="is_rent" value="" />
+                    <!--label for="is_rent">er leiga:</label>
+                    <input id="is_rent" type="checkbox" name="is_rent" value="is_rent"> <br /-->
+                </div>
+                <input class="btn btn-default" type="submit" value="Greiða"> <br />
+            </form>
+        </div>
+    </div>
 {% else %}
-    <a href="{% url 'login' %}">log in</a>
+    <a href="{% url 'login' %}">Skrá inn</a>
 {% endif %}
 {% endblock %}
