@@ -57,7 +57,7 @@ ROOT_URLCONF = 'kommuna.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'kommunabokhald', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,3 +136,12 @@ STATICFILES_DIRS = [
 ]
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+# email system (TODO: use better system)
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com' # mail service smtp
+    EMAIL_HOST_USER = 'dagurdan2@gmail.com' # email id
+    EMAIL_HOST_PASSWORD = 'Slizer100292' #password
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
