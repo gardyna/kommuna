@@ -19,7 +19,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.views.static import serve
+
 from django.contrib.auth import views as auth_views
+from . import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -35,4 +38,5 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     auth_views.password_reset_confirm),
     url(r'^reset/done/$', auth_views.password_reset_complete),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
