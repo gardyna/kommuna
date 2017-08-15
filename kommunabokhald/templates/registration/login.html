@@ -17,4 +17,8 @@
         <input class="btn btn-default" type="submit" value="Skrá inn" />
         <input type="hidden" name="next" value="{{ next }}" />
     </form>
+
+    <p>
+        Gleymdirðu lykilorði? <a href="{% url 'password_reset' %}">Fá nýtt lykilorð</a>
+    </p>
 {% endblock %}
