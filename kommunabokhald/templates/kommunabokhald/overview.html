@@ -1,10 +1,17 @@
 {% extends 'kommunabokhald/base.html' %}
 
 {% block content %}
-<div class="tables">
-    <div class="subTable">
-    <!--p>Your payments total: ???</p-->
-    <table class="table table-bordered" id='payments-table'>
+<h3>Stilla tímabil</h3>
+<form>
+    <label for="from">Frá</label>
+    <input type="date" name="from" value="{{from}}"/>
+    <label for="from">til</label>
+    <input type="date" name="to" value="{{to}}" />
+    <button>Sækja yfirlit</button>
+</form>
+<div class="content">
+    <h4>þínar leigu greiðslur</h4>
+    <table class="table table-bordered" id="your-payments-table">
         <thead>
         <tr>
             <td>Upphæð</td>
@@ -14,43 +21,68 @@
         </tr>
         </thead>
         <tbody>
-        {% for p in payments %}
-            <tr>
-                <td>{{p.amount}} kr</td>
-                <td>{{p.reason}}</td>
-                <td>{{p.user.get_username}}</td>
-                <td>{{p.payment_date}}</td>
-            </tr>
-        {% endfor %}
+            {% for p in userPayments %}
+            <td>{{p.amount}} kr</td>
+            <td>{{p.reason}}</td>
+            <td>{{p.user.get_username}}</td>
+            <td>{{p.payment_date}}</td>
+            {% endfor %}
         </tbody>
     </table>
-    </div>
-    <div class="subTable">
-    <!--p>Your rent total: ???</p-->
-    <table class="table table-bordered" id='rents-table'>
-        <thead>
+    <h5>
+        samtals: {{total}}
+    </h5>
+    <div class="tables">
+        <div class="subTable">
+        <h4>borganir</h4>
+        <table class="table table-bordered" id='payments-table'>
+            <thead>
             <tr>
-                <td>Leiga</td>
-                <td>Húsfélag</td>
-                <td>Rafmagn</td>
-                <td>Internet</td>
-                <td>Húsaleigubætur</td>
-                <td>Samtals</td>
+                <td>Upphæð</td>
+                <td>Lýsing</td>
+                <td>Meðleigandi</td>
+                <td>Dagsetning</td>
             </tr>
-        </thead>
-        <tbody>
-        {% for r in rents %}
-            <tr>
-                <td>{{r.house_rent}} kr</td>
-                <td>{{r.house_fund}}</td>
-                <td>{{r.electricity}}</td>
-                <td>{{r.internet}}</td>
-                <td>{{r.house_reparations}}</td>
-                <td>{{r.get_total_payment_due}}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for p in payments %}
+                <tr>
+                    <td>{{p.amount}} kr</td>
+                    <td>{{p.reason}}</td>
+                    <td>{{p.user.get_username}}</td>
+                    <td>{{p.payment_date}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="subTable">
+        <h4>Leiga</h4>
+        <table class="table table-bordered" id='rents-table'>
+            <thead>
+                <tr>
+                    <td>Leiga</td>
+                    <td>Húsfélag</td>
+                    <td>Rafmagn</td>
+                    <td>Internet</td>
+                    <td>Húsaleigubætur</td>
+                    <td>Samtals</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in rents %}
+                <tr>
+                    <td>{{r.house_rent}} kr</td>
+                    <td>{{r.house_fund}}</td>
+                    <td>{{r.electricity}}</td>
+                    <td>{{r.internet}}</td>
+                    <td>{{r.house_reparations}}</td>
+                    <td>{{r.get_total_payment_due}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
     </div>
 </div>
 {% endblock %}

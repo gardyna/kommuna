@@ -21,10 +21,15 @@ div.payments {
 }
 
 .subTable {
-    height: 55em;
+    height: 50%;
     overflow-y: auto;
     margin: 2%;
     flex: 1;
     width: 40%;
 
+}
+
+#your-payments-table {
+    height: 20%;
+    overflow-y: auto;
 }
