@@ -34,7 +34,7 @@ def payment(request):
 @login_required
 def overview(request):
     """
-    display page to see overview of payments and rent since user joined
+    display page to see overview of payments and rent since user joined or according to params
     """
     user = Housemate.objects.get(pk=request.user.pk)
     # use max to limit searchable timespan to after user joined commune
@@ -46,6 +46,7 @@ def overview(request):
         rents = None
     payments = (Payment.objects.filter(payment_date__range=[since, to], is_rent=False)
                 .order_by('-payment_date'))
+    print('payments', payments)
     userPayments = Payment.objects.filter(user=user, payment_date__range=[since, to], is_rent=True)
     return render(request, 'kommunabokhald/overview.html',{
                 'rents': rents,
