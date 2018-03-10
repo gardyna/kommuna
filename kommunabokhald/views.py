@@ -53,7 +53,7 @@ def overview(request):
                 'payments': payments,
                 'user': user,
                 'userPayments': userPayments,
-                'total': sum(r.house_rent for r in rents),
+                'total': sum(r.house_rent/r.housemates_this_month for r in rents),
                 'from': since,
                 'to': to,
                 })
