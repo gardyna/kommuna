@@ -74,3 +74,11 @@ class Rent(models.Model):
         :return:
         """
         return self.get_total_payment_due() // self.housemates_this_month
+
+
+
+class GroceryItem(models.Model):
+    """
+    an item that is needed
+    """
+    name = models.CharField(max_length=255)

@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 import datetime
 
-from .models import Housemate, Payment, Rent
+from .models import Housemate, Payment, Rent, GroceryItem
 
 
 # Create your views here.
@@ -23,13 +23,14 @@ def payment(request):
     """
     p = Payment(
         amount=int(request.POST['amount']),
-        reason=request.POST['reason'],
+        reason=request.POST.get('reason', ''),
         user=Housemate.objects.get(pk=request.user.pk),
         # is_rent is optional and can be None. therefore make an explicit check
         is_rent=True if request.POST.get('is_rent', False) else False
     )
     p.save()
     return redirect('/index/', permanent=True)
+
 
 @login_required
 def overview(request):
@@ -47,16 +48,17 @@ def overview(request):
     payments = (Payment.objects.filter(payment_date__range=[since, to], is_rent=False)
                 .order_by('-payment_date'))
     print('payments', payments)
-    userPayments = Payment.objects.filter(user=user, payment_date__range=[since, to], is_rent=True)
-    return render(request, 'kommunabokhald/overview.html',{
+    user_payments = Payment.objects.filter(user=user, payment_date__range=[since, to], is_rent=True)
+    return render(request, 'kommunabokhald/overview.html', {
                 'rents': rents,
                 'payments': payments,
                 'user': user,
-                'userPayments': userPayments,
+                'userPayments': user_payments,
                 'total': sum(r.house_rent/r.housemates_this_month for r in rents),
                 'from': since,
                 'to': to,
                 })
+
 
 @login_required
 def payments_in_timespan(request):
@@ -68,3 +70,36 @@ def payments_in_timespan(request):
     """
     payments = Payment.objects.filter(payment_date__range=[request.GET['from'], request.GET['to']])
     return JsonResponse(payments)
+
+
+@login_required
+def grocery_list(request):
+    """
+    get the grocery list
+    :param request:
+    :return:
+    """
+    items = GroceryItem.objects.all()
+    return render(request, 'kommunabokhald/groceries.html', {
+        'items': items
+    })
+
+@login_required
+def add_grocery_item(request):
+    """
+    add item to grocery list
+    :param request:
+    :return:
+    """
+    print(request.POST.get('item'))
+    item = GroceryItem(
+        name=request.POST['item']
+    )
+    item.save()
+    return redirect('/groceries/')
+
+
+def remove_grocery_item(request, id):
+    item = GroceryItem.objects.filter(pk=id)
+    item.delete()
+    return redirect('/groceries/')

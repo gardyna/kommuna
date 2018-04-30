@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "cemrf@t43%!y=#-)d1db4_$bvk!d&att1mvqi3h6j$pu4&85o7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".herokuapp.com", 'localhost', 'kommunan.com', 'www.kommunan.com']
+ALLOWED_HOSTS = [".herokuapp.com", 'localhost', 'kommunan.com', 'www.kommunan.com', '127.0.0.1']
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd75q9hdctu71im',
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
+        'USER': 'obtwyjgnrhgoyx',
+        'PASSWORD': '6247f7209786fd5afe78560544b77f9232374bfdb2348936fe5bcdb6557d11ac',
         'HOST': 'ec2-50-19-125-201.compute-1.amazonaws.com',
         'PORT': '5432',
     }

@@ -6,20 +6,27 @@
             </a>
         </div>
         <ul class="nav navbar-nav">
-          <li>
-              <a href="/overview">
+          <li class="nav-item">
+              <a class="nav-link" href="/overview">
                   <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Yfirlit
               </a>
           </li>
-          <li>{% if user.is_authenticated %}
-              <a href="{% url 'logout' %}">
-                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá út
-              </a>
-          {% else %}
-              <a href="{% url 'login' %}">
-                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá inn
-              </a>
-          {% endif %}</li>
+        <li class="nav-item">
+            <a class="nav-link" href="/groceries">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Innkaupalisti
+            </a>
+        </li>
+          <li class="nav-item">
+              {% if user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'logout' %}" style="">
+                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá út
+                  </a>
+              {% else %}
+                  <a class="nav-link" href="{% url 'login' %}">
+                      <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Skrá inn
+                  </a>
+            {% endif %}
+          </li>
         </ul>
     </div>
 </nav>
