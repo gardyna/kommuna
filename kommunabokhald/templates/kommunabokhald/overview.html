@@ -42,9 +42,10 @@
                     <td>Leiga</td>
                     <td>Húsfélag</td>
                     <td>Rafmagn</td>
-                    <td>Internet</td>
                     <td>Húsaleigubætur</td>
                     <td>Samtals</td>
+                    <td>Athugasemd</td>
+                    <td>Dagsetning</td>
                 </tr>
             </thead>
             <tbody>
@@ -53,9 +54,10 @@
                     <td>{{r.house_rent}} kr</td>
                     <td>{{r.house_fund}}</td>
                     <td>{{r.electricity}}</td>
-                    <td>{{r.internet}}</td>
                     <td>{{r.house_reparations}}</td>
                     <td>{{r.get_total_payment_due}}</td>
+                    <td>{{ r.comments }}</td>
+                    <td>{{ r.created }}</td>
                 </tr>
             {% endfor %}
             </tbody>

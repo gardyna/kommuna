@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
-import datetime
+from datetime import timedelta, date
 
 from .models import Housemate, Payment, Rent, GroceryItem
 
@@ -39,25 +39,27 @@ def overview(request):
     """
     user = Housemate.objects.get(pk=request.user.pk)
     # use max to limit searchable timespan to after user joined commune
+    num_items = 0 if request.GET.get('from', False) else 15
     since = request.GET['from'] if request.GET.get('from', False) else user.date_joined.strftime('%Y-%m-%d')
-    to = request.GET['to'] if request.GET.get('to', False) else datetime.date.today().strftime('%Y-%m-%d')
+    to = request.GET['to'] if request.GET.get('to', False) else date.today().__add__(timedelta(1)).strftime('%Y-%m-%d')
     try:
-        rents = Rent.objects.filter(created__range=[since, to])
+        rents = Rent.objects.filter(created__range=[since, to]).order_by('-created')[:num_items or None]
     except Rent.DoesNotExist:
         rents = None
     payments = (Payment.objects.filter(payment_date__range=[since, to], is_rent=False)
-                .order_by('-payment_date'))
-    print('payments', payments)
-    user_payments = Payment.objects.filter(user=user, payment_date__range=[since, to], is_rent=True)
+                .order_by('-payment_date'))[:num_items or None]
+    user_payments = Payment.objects.filter(user=user, payment_date__range=[since, to], is_rent=True) \
+                    .order_by('-payment_date')[:num_items or None]
+
     return render(request, 'kommunabokhald/overview.html', {
-                'rents': rents,
-                'payments': payments,
-                'user': user,
-                'userPayments': user_payments,
-                'total': sum(r.house_rent/r.housemates_this_month for r in rents),
-                'from': since,
-                'to': to,
-                })
+        'rents': rents,
+        'payments': payments,
+        'user': user,
+        'userPayments': user_payments,
+        'total': int(sum(r.house_rent / r.housemates_this_month for r in rents)),
+        'from': since,
+        'to': to,
+    })
 
 
 @login_required
@@ -84,6 +86,7 @@ def grocery_list(request):
         'items': items
     })
 
+
 @login_required
 def add_grocery_item(request):
     """
@@ -91,7 +94,6 @@ def add_grocery_item(request):
     :param request:
     :return:
     """
-    print(request.POST.get('item'))
     item = GroceryItem(
         name=request.POST['item']
     )
