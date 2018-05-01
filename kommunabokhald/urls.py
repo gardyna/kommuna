@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^addgrocery/$', views.add_grocery_item, name='add_grocery'),
     url(r'^removegrocery/(?P<id>[^/]+)/$', views.remove_grocery_item, name='remove_grocery'),
     url(r'^index/$', views.index, name='index'),
-    url(r'^getdebt', views.DebtHandler.as_view(), name='getdebt'),
+    url(r'^getdebt/$', views.DebtHandler.as_view(), name='getdebt'),
+    url(r'^getgroceries/$', views.GroceryHandler.as_view()),
     url(r'^$', views.index, name='index'),
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import authentication, permissions
+from rest_framework import authentication, permissions, serializers, status
 from datetime import timedelta, date
 
 from .models import Housemate, Payment, Rent, GroceryItem
@@ -109,6 +109,7 @@ def remove_grocery_item(request, id):
     item.delete()
     return redirect('/groceries/')
 
+
 class DebtHandler(APIView):
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated, )
@@ -116,3 +117,22 @@ class DebtHandler(APIView):
     def get(self, request, format=None):
         user = Housemate.objects.get(pk=request.user.pk)
         return Response({'debt': user.get_total_debt_due()})
+
+class GrocerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GroceryItem
+        fields = ('pk', 'name')
+
+class GroceryHandler(APIView):
+    authentication_classes = (authentication.TokenAuthentication, )
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get(self, request, format=None):
+        items = GrocerySerializer(GroceryItem.objects.all(), many=True)
+        return JsonResponse({'groceries': items.data})
+
+    def post(self, request, format=None):
+        serializer = GrocerySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
