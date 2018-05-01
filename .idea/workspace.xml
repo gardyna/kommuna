@@ -63,8 +63,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kommunabokhald/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="146" column="33" lean-forward="true" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+            <state relative-caret-position="260">
+              <caret line="144" column="49" lean-forward="false" selection-start-line="144" selection-start-column="49" selection-end-line="144" selection-end-column="49" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -544,7 +544,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525207752753</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="grocery delete">
+      <created>1525210944832</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1525210944832</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -588,7 +595,8 @@
     <MESSAGE value="requirements oops" />
     <MESSAGE value="getdebt route" />
     <MESSAGE value="grocery get and post" />
-    <option name="LAST_COMMIT_MESSAGE" value="grocery get and post" />
+    <MESSAGE value="grocery delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="grocery delete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -982,8 +990,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kommunabokhald/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="146" column="33" lean-forward="true" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+        <state relative-caret-position="260">
+          <caret line="144" column="49" lean-forward="false" selection-start-line="144" selection-start-column="49" selection-end-line="144" selection-end-column="49" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>

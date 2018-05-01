@@ -118,10 +118,12 @@ class DebtHandler(APIView):
         user = Housemate.objects.get(pk=request.user.pk)
         return Response({'debt': user.get_total_debt_due()})
 
+
 class GrocerySerializer(serializers.ModelSerializer):
     class Meta:
         model = GroceryItem
         fields = ('pk', 'name')
+
 
 class GroceryHandler(APIView):
     authentication_classes = (authentication.TokenAuthentication, )
@@ -140,7 +142,7 @@ class GroceryHandler(APIView):
     def delete(self, request, format=None):
         item = self.get_object(request.data['id'])
         item.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializer = GrocerySerializer(data=request.data)
