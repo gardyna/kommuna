@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^index/$', views.index, name='index'),
     url(r'^getdebt/$', views.DebtHandler.as_view(), name='getdebt'),
     url(r'^getgroceries/$', views.GroceryHandler.as_view()),
+    url(r'^api/makepayment/$', views.PaymentView.as_view(), name='json_payment'),
     url(r'^$', views.index, name='index'),
 ]
