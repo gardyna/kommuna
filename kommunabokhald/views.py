@@ -101,6 +101,7 @@ def add_grocery_item(request):
     return redirect('/groceries/')
 
 
+@login_required
 def remove_grocery_item(request, id):
     item = GroceryItem.objects.filter(pk=id)
     item.delete()

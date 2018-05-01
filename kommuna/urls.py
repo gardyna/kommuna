@@ -22,7 +22,27 @@ from django.conf.urls.static import static
 from django.views.static import serve
 
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+from rest_framework import permissions
 from . import settings
+from . import views
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'email', 'is_staff')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -38,5 +58,8 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
     auth_views.password_reset_confirm),
     url(r'^reset/done/$', auth_views.password_reset_complete),
-    url(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^api-token-auth/$', views.CustomAuthToken.as_view())
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
