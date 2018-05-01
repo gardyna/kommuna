@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
 from datetime import timedelta, date
 
 from .models import Housemate, Payment, Rent, GroceryItem
@@ -106,3 +108,11 @@ def remove_grocery_item(request, id):
     item = GroceryItem.objects.filter(pk=id)
     item.delete()
     return redirect('/groceries/')
+
+class DebtHandler(APIView):
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get(self, request, format=None):
+        user = Housemate.objects.get(pk=request.user.pk)
+        return Response({'debt': user.get_total_debt_due()})
