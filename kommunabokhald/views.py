@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions, serializers, status
@@ -127,9 +127,20 @@ class GroceryHandler(APIView):
     authentication_classes = (authentication.TokenAuthentication, )
     permission_classes = (permissions.IsAuthenticated, )
 
+    def get_object(self, id):
+        try:
+            return GroceryItem.objects.get(pk=id)
+        except GroceryItem.DoesNotExist:
+            raise Http404
+
     def get(self, request, format=None):
         items = GrocerySerializer(GroceryItem.objects.all(), many=True)
         return JsonResponse({'groceries': items.data})
+
+    def delete(self, request, format=None):
+        item = self.get_object(request.data['id'])
+        item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def post(self, request, format=None):
         serializer = GrocerySerializer(data=request.data)
