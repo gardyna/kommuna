@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from django.conf import settings
 from django.conf.urls.static import static
 
 from django.views.static import serve
@@ -25,6 +24,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from rest_framework import permissions
+from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
+from rest_framework.documentation import include_docs_urls
 from . import settings
 from . import views
 
@@ -43,6 +44,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'devices', FCMDeviceAuthorizedViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -56,10 +58,11 @@ urlpatterns = [
         }),
     url(r'^password_reset/done/$', auth_views.password_reset_done),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-    auth_views.password_reset_confirm),
+        auth_views.password_reset_confirm),
     url(r'^reset/done/$', auth_views.password_reset_complete),
     url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^api-token-auth/$', views.CustomAuthToken.as_view())
+    url(r'^api-token-auth/$', views.CustomAuthToken.as_view()),
+    url(r'^docs/', include_docs_urls(title='api documentation')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

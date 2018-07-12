@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'kommunabokhald.apps.KommunabokhaldConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'fcm_django'
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+FCM_DJANGO_SETTINGS = {
+    'FCM_SERVER_KEY': 'AIzaSyCzn_9IWg7yI0eCp-Uv4N29YcIhUX0gKJ0',
+    'ONE_DEVICE_PER_USER': False,
+    'DELETE_INACTIVE_DEVICES': False,
 }
 
 # email system (TODO: use better system)
