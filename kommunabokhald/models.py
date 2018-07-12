@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from fcm_django.models import FCMDevice
 
 import datetime
 
@@ -59,6 +60,12 @@ class Rent(models.Model):
     # auto filled used for calculations and book keeping
     housemates_this_month = models.IntegerField(default=get_total_housemates)
     created = models.DateField(default=datetime.date.today)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            devices = FCMDevice.objects.all()
+            devices.send_message(title='Leiga kominn inn', body='leigan var að koma!!!')
+        super(Rent, self).save(*args, **kwargs)
 
     def get_total_payment_due(self):
         """
