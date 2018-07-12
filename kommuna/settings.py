@@ -154,7 +154,7 @@ REST_FRAMEWORK = {
 }
 
 FCM_DJANGO_SETTINGS = {
-    'FCM_SERVER_KEY': 'AIzaSyCzn_9IWg7yI0eCp-Uv4N29YcIhUX0gKJ0',
+    'FCM_SERVER_KEY': os.environ.get('FCM_KEY'),
     'ONE_DEVICE_PER_USER': False,
     'DELETE_INACTIVE_DEVICES': False,
 }

@@ -23,8 +23,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kommuna/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="51" column="43" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+            <state relative-caret-position="409">
+              <caret line="158" column="37" lean-forward="true" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -219,8 +219,9 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="kommuna.settings" />
+        <env name="FCM_KEY" value="AAAA-Y-GPQk:APA91bF3xkwozJKj0-E45H435o3ZSiEoWMMYql8sEMfA5M1h04EAFXxIh2MvBeWanfF0v-825TAt6Yn2Gke2dCcFrx1MZhLDkY5BaAr6FByev20ux3Db17lku4gpDzr4azj7L6lnJGsP9_3jjoHpNP0_BlmVy2A8tg" />
+        <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DATABASE_URL" value="postgres://ixzrrobpnqvvvn:6c632285dfac61f8212a9214afc237cf30fd3d4f64046c8c26833f023a49a3c6@ec2-23-21-96-70.compute-1.amazonaws.com:5432/d2eu4hs6594gi9" />
         <env name="PASSWORD" value="6247f7209786fd5afe78560544b77f9232374bfdb2348936fe5bcdb6557d11ac" />
         <env name="SECRET_KEY" value="cemrf@t43%!y=#-)d1db4_$bvk!d&amp;att1mvqi3h6j$pu4&amp;85o7" />
@@ -594,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531417885198</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="forgot to add csrf middleware">
+      <created>1531418467370</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1531418467370</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -605,8 +613,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.146875" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25833333" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.325" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25833333" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21641791" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -645,7 +653,8 @@
     <MESSAGE value="api" />
     <MESSAGE value="fcm" />
     <MESSAGE value="csrf" />
-    <option name="LAST_COMMIT_MESSAGE" value="csrf" />
+    <MESSAGE value="forgot to add csrf middleware" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot to add csrf middleware" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1071,8 +1080,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kommuna/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="51" column="43" lean-forward="false" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+        <state relative-caret-position="409">
+          <caret line="158" column="37" lean-forward="true" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
           <folding />
         </state>
       </provider>
