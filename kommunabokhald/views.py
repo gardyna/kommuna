@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, Http404
+from fcm_django.models import FCMDevice
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -149,6 +150,9 @@ class GroceryHandler(APIView):
         serializer = GrocerySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            devices = FCMDevice.objects.all()
+            devices.send_message(title=f"{self.request.user.username} bætti við hlut í innkaupalistan",
+                                 body=serializer.data.get("name"))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

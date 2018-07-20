@@ -15,6 +15,7 @@ class Housemate(User):
     a class extending the user model to be able to calculate debts
     will also use the same table as User model
     """
+
     class Meta:
         proxy = True
 
@@ -81,7 +82,6 @@ class Rent(models.Model):
         :return:
         """
         return self.get_total_payment_due() // self.housemates_this_month
-
 
 
 class GroceryItem(models.Model):
